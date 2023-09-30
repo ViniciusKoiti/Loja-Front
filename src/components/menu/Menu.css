@@ -1,0 +1,30 @@
+.menu {
+	padding: 10px;
+}
+
+ul {
+	list-style: none;
+	padding: 0;
+	display: flex;
+	justify-content: flex-start;
+}
+
+li {
+	margin-right: 20px;
+	cursor: pointer;
+}
+
+li:hover {
+	text-decoration: underline;
+}
+
+.inputSwitch{
+	display: flex;
+	width: 100%;
+	justify-content: end;
+}
+
+.p-inputswitch.p-inputswitch-checked .p-inputswitch-slider{
+	background-color: black;
+}
+
