@@ -47,10 +47,19 @@ const EstadoFormulario = (props) => {
 	}
 
 	return (
-		<div style={{ padding: '10px' }}>
+		<div className="container">
 			<h2>Inserir ou Alterar um Estado</h2>
-			<input type="text" name="nome" value={estado.nome} onChange={alterarValor} /><br /><br />
-			<input type="text" name="sigla" value={estado.sigla} onChange={alterarValor} /><br /><br />
+			<div className="row">
+				<div>
+					<label htmlFor="nome">Nome:</label>
+					<input type="text" name="nome" value={estado.nome} onChange={alterarValor} />
+				</div>
+				<div>
+					<label htmlFor="sigla">Sigla:</label>
+					<input type="text" name="sigla" value={estado.sigla} onChange={alterarValor} />
+				</div>
+			</div>
+			
 			<button onClick={salvar}>Salvar</button>
 			<button onClick={listaEstados}>Lista Estados</button>
 		</div>
