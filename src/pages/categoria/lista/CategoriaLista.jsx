@@ -61,7 +61,7 @@ const ProdutoLista = () => {
 				<Column field="valorPromocional" header="Valor Promocional"></Column>
 				<Column header="Opções" body={optionColumn}></Column>
 			</DataTable>
-
+			
 			<ConfirmDialog visible={dialogExcluir} onHide={() => setDialogExcluir(false)} message="Deseja excluir?"
 				header="Confirmação" icon="pi pi-exclamation-triangle" accept={excluir} reject={() => setIdExcluir(null)} acceptLabel="Sim" rejectLabel="Não"/>
 

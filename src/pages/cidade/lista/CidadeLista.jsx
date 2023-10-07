@@ -7,16 +7,21 @@ import { Column } from 'primereact/column';
 import { Button } from "primereact/button";
 import { ConfirmDialog } from 'primereact/confirmdialog';
 
-const ProdutoLista = () => {
+const CidadeLista = () => {
 	const navigate = useNavigate();
 	const [produtos, setProdutos] = useState([]);
 	const produtoService = new ProdutoService();
 	const [idExcluir, setIdExcluir] = useState(null);
 	const [dialogExcluir, setDialogExcluir] = useState(false);
+	const [first, setFirst] = useState(0);
 
 	useEffect(() => {
 		buscarProdutos();
 	}, []);
+
+	const onPageChange = (event) => {
+		setFirst(event.first); // Atualize a primeira página
+	}
 
 	const buscarProdutos = () => {
 		produtoService.listar().then(data => {
@@ -34,7 +39,7 @@ const ProdutoLista = () => {
 	}
 
 	const excluir = () => {
-		produtoService.excluir(idExcluir).then(data=>{
+		cidadeService.excluir(idExcluir).then(data=>{
 			buscarProdutos();
 		});
 	}
@@ -51,8 +56,8 @@ const ProdutoLista = () => {
 
 	return (
 		<div className="container">
-			<h2>Lista de Produtos</h2>
-			<button onClick={formulario}>Novo Produto</button>
+			<h2>Lista de Cidade</h2>
+			<button onClick={formulario}>Novo Cidade</button>
 			<br /><br />
 			<DataTable value={produtos} tableStyle={{ minWidth: '50rem' }}>
 				<Column field="id" header="Id"></Column>
@@ -61,7 +66,12 @@ const ProdutoLista = () => {
 				<Column field="valorPromocional" header="Valor Promocional"></Column>
 				<Column header="Opções" body={optionColumn}></Column>
 			</DataTable>
-
+			<Paginator // Componente Paginator para a paginação
+				first={first}
+				rows={10}
+				totalRecords={100} // Total de registros (você deve obter isso do servidor)
+				onPageChange={onPageChange}
+			/>
 			<ConfirmDialog visible={dialogExcluir} onHide={() => setDialogExcluir(false)} message="Deseja excluir?"
 				header="Confirmação" icon="pi pi-exclamation-triangle" accept={excluir} reject={() => setIdExcluir(null)} acceptLabel="Sim" rejectLabel="Não"/>
 

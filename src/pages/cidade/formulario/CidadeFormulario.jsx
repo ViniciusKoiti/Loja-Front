@@ -4,10 +4,6 @@ import './ProdutoFormulario.css';
 import { ProdutoService } from "../../../services/ProdutoService";
 
 const ProdutoFormulario = (props) => {
-	//const navigate = useNavigate();
-	//const location = useLocation();
-	///const { id } = location.state || {};
-	//const { ii } = useParams();
 	const navigate = useNavigate();
 	const produtoNovo = { descricao: '', valor: 0, valorPromocional: 0 };
 	const location = useLocation();

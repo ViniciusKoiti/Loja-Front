@@ -6,6 +6,7 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { InputSwitch } from 'primereact/inputswitch';
 import { Button } from "primereact/button";
+import { Paginator } from 'primereact/paginator';
 import { ConfirmDialog } from 'primereact/confirmdialog';
 
 const EstadoLista = () => {
@@ -14,6 +15,7 @@ const EstadoLista = () => {
 	const estadoService = new EstadoService();
 	const [idExcluir, setIdExcluir] = useState(null);
 	const [dialogExcluir, setDialogExcluir] = useState(false);
+	const [first, setFirst] = useState(0); 
 
 	useEffect(() => {
 		buscarEstados();
@@ -23,6 +25,10 @@ const EstadoLista = () => {
 		estadoService.listar().then(data => {
 			setEstados(data.data);
 		})
+	}
+
+	const onPageChange = (event) => {
+		setFirst(event.first); // Atualize a primeira página
 	}
 
 	const formulario = () => {
@@ -66,6 +72,12 @@ const EstadoLista = () => {
 				<Column field="sigla" header="Sigla"></Column>
 				<Column header="Opções" class="options" body={optionColumn}></Column>
 			</DataTable>
+			<Paginator // Componente Paginator para a paginação
+				first={first}
+				rows={10}
+				totalRecords={100} // Total de registros (você deve obter isso do servidor)
+				onPageChange={onPageChange}
+			/>
 
 			<ConfirmDialog visible={dialogExcluir} onHide={() => setDialogExcluir(false)} message="Deseja excluir?"
 				header="Confirmação" icon="pi pi-exclamation-triangle" accept={excluir} reject={() => setIdExcluir(null)} acceptLabel="Sim" rejectLabel="Não"/>

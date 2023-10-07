@@ -23,7 +23,7 @@ li:hover {
 		display: flex;
 		flex: 1 1;
 		flex-direction: column;
-		align-items: center;
+		align-items: end;
 }
 
 .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider{

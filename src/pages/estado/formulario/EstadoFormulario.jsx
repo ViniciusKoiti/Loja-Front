@@ -4,16 +4,13 @@ import './EstadoFormulario.css';
 import { EstadoService } from "../../../services/EstadoService";
 
 const EstadoFormulario = (props) => {
-	//const navigate = useNavigate();
-	//const location = useLocation();
-	///const { id } = location.state || {};
-	//const { ii } = useParams();
 	const navigate = useNavigate();
 	const estadoNovo = { nome: '', sigla: ''};
 	const location = useLocation();
 	const { estadoAlterar } = location.state || {};
 
 	const [estado, setEstado] = useState(estadoNovo);
+	const [first, setFirst] = useState(0);
 	const estadoService = new EstadoService();
 
 	useEffect(() => {
@@ -35,12 +32,10 @@ const EstadoFormulario = (props) => {
 	const salvar = () => {
 		if (estado.id) {
 			estadoService.alterar(estado).then(data => {
-				console.log(data);
 				setEstado(estadoNovo);
 			});
 		} else {
 			estadoService.inserir(estado).then(data => {
-				console.log(data);
 				setEstado(estadoNovo);
 			});
 		}
