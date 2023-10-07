@@ -21,8 +21,8 @@ const EstadoLista = () => {
 		buscarEstados();
 	}, []);
 
-	const buscarEstados = () => {
-		estadoService.listar().then(data => {
+	const buscarEstados = (page) => {
+		estadoService.listar(page).then(data => {
 			setEstados(data.data);
 		})
 	}
@@ -65,7 +65,6 @@ const EstadoLista = () => {
 
 			</div>
 		
-			<br /><br />
 			<DataTable value={estados} tableStyle={{ minWidth: '50rem' }}>
 				<Column field="id" header="Id"></Column>
 				<Column field="nome" header="Nome"></Column>
@@ -78,7 +77,7 @@ const EstadoLista = () => {
 				totalRecords={100} // Total de registros (você deve obter isso do servidor)
 				onPageChange={onPageChange}
 			/>
-
+		
 			<ConfirmDialog visible={dialogExcluir} onHide={() => setDialogExcluir(false)} message="Deseja excluir?"
 				header="Confirmação" icon="pi pi-exclamation-triangle" accept={excluir} reject={() => setIdExcluir(null)} acceptLabel="Sim" rejectLabel="Não"/>
 

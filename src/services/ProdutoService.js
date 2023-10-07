@@ -15,7 +15,7 @@ export class ProdutoService{
 		return axios.delete(this.URL+"/"+id);
 	}
 
-	listar(){
+	listar(page){
 		return axios.get(this.URL);
 	}
 }
